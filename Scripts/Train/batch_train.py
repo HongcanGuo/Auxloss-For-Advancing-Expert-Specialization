@@ -52,7 +52,7 @@ model = get_peft_model(model, config)
 print(model)
 
 def process_func(example):
-    MAX_LENGTH = 384  
+    MAX_LENGTH = 512 # The longer the better. Due to computing resource limitations, we used 512. Ideally, it should be stretched to 4k or 8k for best results.
     input_ids, attention_mask, labels = [], [], []
     instruction = tokenizer(f"<|start_header_id|>user<|end_header_id|>\n\n{example['instruction'] + example['input']}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n", add_special_tokens=False) 
     response = tokenizer(f"{example['output']}<|eot_id|>", add_special_tokens=False)
